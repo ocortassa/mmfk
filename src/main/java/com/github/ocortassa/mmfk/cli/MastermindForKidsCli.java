@@ -83,11 +83,6 @@ public class MastermindForKidsCli {
         System.out.println(msg);
     }
 
-    /*private void logInfo(String msg) {
-        System.out.println(msg);
-        LOGGER.info(msg);
-    }*/
-
     private void logError(String msg) {
         System.err.println(msg);
         LOGGER.error(msg);
