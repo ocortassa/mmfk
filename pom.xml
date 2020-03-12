@@ -35,14 +35,23 @@
             <version>1.18</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.6.0</version>
             <scope>test</scope>
         </dependency>
+        -->
 
-   </dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>
@@ -70,11 +79,6 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <configuration>
-                            <includes>
-                                <include>com/github/ocortassa/mmfk/**/*.class</include>
-                            </includes>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>report</id>
