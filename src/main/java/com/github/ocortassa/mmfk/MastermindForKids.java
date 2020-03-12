@@ -12,9 +12,9 @@ public class MastermindForKids {
 
     private final static Logger LOGGER = LogManager.getLogger(MastermindForKids.class);
 
-    private int attemptCounter = 0;
     private String secret;
-    private String lastAttempt;
+    //private int attemptCounter = 0;
+    //private String lastAttempt;
 
     public void setSecret(String secret) {
         this.secret = secret;
@@ -25,7 +25,7 @@ public class MastermindForKids {
     }
 
     public String hasWin(String attempt) {
-        attemptCounter++;
+        //attemptCounter++;
         return isRightSequence(secret, attempt);
     }
 
