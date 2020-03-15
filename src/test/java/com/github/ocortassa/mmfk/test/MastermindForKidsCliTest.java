@@ -1,7 +1,11 @@
 package com.github.ocortassa.mmfk.test;
 
 import com.github.ocortassa.mmfk.cli.MastermindForKidsCli;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.io.ByteArrayOutputStream;
