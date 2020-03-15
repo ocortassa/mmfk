@@ -43,8 +43,7 @@ public class MastermindForKidsCliTest {
         Assert.assertEquals(cli.play("RRRR"), "");
     }
 
-
-    //@Test
+    @Test
     public void doReadSecretTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
         systemInMock.provideLines("RRRR");
@@ -53,7 +52,7 @@ public class MastermindForKidsCliTest {
         Assert.assertEquals("RRRR".trim(), cli.readSecret());
     }
 
-    //@Test
+    @Test
     public void doReadAttemptTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
         systemInMock.provideLines("RRRR");
@@ -62,7 +61,7 @@ public class MastermindForKidsCliTest {
         Assert.assertEquals("RRRR".trim(), cli.readAttempt());
     }
 
-    @Test
+    //@Test
     public void doOutTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
         resetBuffers();
@@ -70,7 +69,7 @@ public class MastermindForKidsCliTest {
         Assert.assertEquals("test", outContent.toString());
     }
 
-    @Test
+    //@Test
     public void doOutLnTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
         resetBuffers();
