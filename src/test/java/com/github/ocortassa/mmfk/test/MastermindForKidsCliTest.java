@@ -77,7 +77,7 @@ public class MastermindForKidsCliTest {
         Assert.assertEquals("test\r\n", outContent.toString());
     }
 
-    @Test
+    //@Test
     public void doOutErrorTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
         resetBuffers();
