@@ -41,8 +41,7 @@ public class MastermindForKidsCliTest {
     @Test
     public void doMainTest() {
         systemInMock.provideLines("RRRR");
-        systemInMock.provideLines("RRRR");
-        MastermindForKidsCli.main(new String[] {});
+        MastermindForKidsCli.main( new String[] { "RRRR" } );
         Assert.assertTrue(true);
     }
 
