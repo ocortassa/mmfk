@@ -1,26 +1,25 @@
 package com.github.ocortassa.mmfk.test;
 
 import com.github.ocortassa.mmfk.cli.MastermindForKidsCli;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemErrRule;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 public class MastermindForKidsCliTest {
 
     @Rule
     public final TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
+    @Rule
+    public final SystemErrRule systemErrMock = new SystemErrRule().enableLog();
 
+    @Rule
+    public final SystemOutRule systemOutMock = new SystemOutRule().enableLog();
+
+    /*
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
@@ -36,6 +35,15 @@ public class MastermindForKidsCliTest {
     private void resetBuffers() {
         outContent.reset();
         errContent.reset();
+    }
+    */
+
+    @Test
+    public void doMainTest() {
+        systemInMock.provideLines("RRRR");
+        systemInMock.provideLines("RRRR");
+        MastermindForKidsCli.main(new String[] {});
+        Assert.assertTrue(true);
     }
 
     @Test
@@ -65,28 +73,25 @@ public class MastermindForKidsCliTest {
         Assert.assertEquals("RRRR".trim(), cli.readAttempt());
     }
 
-    //@Test
+    @Test
     public void doOutTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
-        resetBuffers();
         cli.out("test");
-        Assert.assertEquals("test", outContent.toString());
+        Assert.assertEquals("test", systemOutMock.getLog());
     }
 
-    //@Test
+    @Test
     public void doOutLnTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
-        resetBuffers();
         cli.outLn("test");
-        Assert.assertEquals("test\r\n", outContent.toString());
+        Assert.assertEquals("test" + System.getProperty("line.separator"), systemOutMock.getLog());
     }
 
-    //@Test
+    @Test
     public void doOutErrorTest() {
         MastermindForKidsCli cli = new MastermindForKidsCli();
-        resetBuffers();
         cli.outError("test");
-        Assert.assertEquals("test\r\n", errContent.toString());
+        Assert.assertEquals("test" + System.getProperty("line.separator"), systemErrMock.getLog());
     }
 
 }
