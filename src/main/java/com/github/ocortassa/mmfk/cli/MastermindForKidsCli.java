@@ -17,31 +17,35 @@ public class MastermindForKidsCli {
     public static void main(String[] args) {
         MastermindForKidsCli cli = new MastermindForKidsCli();
         String secret = "";
-        if (args.length == 0) {
-            secret = cli.readSecret();
-            for (int j = 0; j < 50; j++) {
-                cli.outLn("");
-            }
-        } else {
-            secret = args[0];
-        }
-        cli.setSecret(secret);
-        cli.outLn("Sequenza impostata, hai " + cli.getMaxAttempts() + " tentativi!\nSi comincia!");
-        cli.outLn("");
-
-        for (int i = 0; i < cli.getMaxAttempts(); i++) {
-            cli.outLn("");
-            cli.out("Tentativo " + (i + 1) + ", ");
-            String attempt = cli.readAttempt();
-            String result = cli.play(attempt);
-            if (result == null || result.isEmpty()) {
-                cli.outLn("HAI VINTO!!!!");
-                break;
+        try {
+            if (args.length == 0) {
+                secret = cli.readSecret();
+                for (int j = 0; j < 50; j++) {
+                    cli.outLn("");
+                }
             } else {
-                cli.outLn("Peccato, non hai indovinato entro i " + cli.getMaxAttempts() + " tentativi previsti.\nLa sequenza giusta era: " + secret);
+                secret = args[0];
             }
-        }   //  end game
+            cli.setSecret(secret);
+            cli.outLn("Sequenza impostata, hai " + cli.getMaxAttempts() + " tentativi!\nSi comincia!");
+            cli.outLn("");
 
+            for (int i = 0; i < cli.getMaxAttempts(); i++) {
+                cli.outLn("");
+                cli.out("Tentativo " + (i + 1) + ", ");
+                String attempt = cli.readAttempt();
+                String result = cli.play(attempt);
+                if (result == null || result.isEmpty()) {
+                    cli.outLn("HAI VINTO!!!!");
+                    break;
+                } else {
+                    cli.outLn("Peccato, non hai indovinato entro i " + cli.getMaxAttempts() + " tentativi previsti.\nLa sequenza giusta era: " + secret);
+                }
+            }   //  end game
+        } catch (Exception e) {
+            cli.outError(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 
     public void setSecret(String secret) {
@@ -64,17 +68,24 @@ public class MastermindForKidsCli {
             secret = "" + Arrays.toString(console.readPassword());
         } else {
             Scanner in = new Scanner(System.in);
-            secret = in.next().trim();
-            in.close();
+            try {
+                secret = in.next().trim();
+            } finally {
+                in.close();
+            }
         }
         return secret;
     }
 
     public String readAttempt() {
         Scanner in = new Scanner(System.in);
-        out("vai: ");
-        String value = in.next().trim();
-        in.close();
+        String value;
+        try {
+            out("vai: ");
+            value = in.next().trim();
+        } finally {
+            in.close();
+        }
         return value;
     }
 

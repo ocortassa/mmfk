@@ -19,30 +19,18 @@ public class MastermindForKidsCliTest {
     @Rule
     public final SystemOutRule systemOutMock = new SystemOutRule().enableLog();
 
-    /*
-    @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    @After
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
-
-    private void resetBuffers() {
-        outContent.reset();
-        errContent.reset();
-    }
-    */
-
     @Test
-    public void doMainTest() {
+    public void doMainWithKnownSecretTest() {
         systemInMock.provideLines("RRRR");
         MastermindForKidsCli.main( new String[] { "RRRR" } );
         Assert.assertTrue(true);
+    }
+
+    @Test
+    public void doMainWithUnknownSecretTest() {
+        systemInMock.provideLines("GGGG");
+        MastermindForKidsCli.main(new String[]{});
+        Assert.assertEquals("null" + System.getProperty("line.separator"), systemErrMock.getLog());
     }
 
     @Test
