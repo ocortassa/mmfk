@@ -7,3 +7,5 @@
 # Mastermind for Kids
 
 A minimal version of the Mastermind popular game for my children.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ocortassa/mmfk)
